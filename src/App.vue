@@ -1,13 +1,11 @@
 <template>
-  <router-view></router-view>
+  <AppProvider>
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </AppProvider>
 </template>
 
-<script setup lang="ts">
-import { defineComponent } from 'vue'
-
-defineComponent({
-  name: 'App',
-})
-</script>
+<script setup lang="ts"></script>
 
 <style></style>

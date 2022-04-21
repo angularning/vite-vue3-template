@@ -1,5 +1,5 @@
 <template>
-  <div>index</div>
+  <div>indexindexindexindexindexindexindexindexindexindexindexindex</div>
   <FetchList :msg="'a'"></FetchList>
 </template>
 <script setup lang="ts">

@@ -1,1 +1,1 @@
-export { default as FetchList } from './FetchList.vue'
+export { default as FetchList } from './index/FetchList.vue'

@@ -2,7 +2,7 @@
   "version": "0.0.0",
   "license": "ISC",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build:staging": "vite build --mode staging",
     "build:production": "vite build --mode production",
     "serve": "vite preview",
@@ -17,6 +17,7 @@
     "pinia": "^2.0.0-rc.10",
     "vfonts": "^0.1.0",
     "vue": "^3.2.2",
+    "@vueuse/core": "^8.3.0",
     "vue-router": "4"
   },
   "devDependencies": {
