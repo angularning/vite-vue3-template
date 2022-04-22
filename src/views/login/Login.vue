@@ -39,14 +39,12 @@ const title = ref('登录系统')
 async function handleLogin() {
   const { name, password } = loginInfo.value
   if (!name || !password) {
-    // @ts-ignore
-    $message.warning('请输入用户名和密码')
+    window.$message.warning('请输入用户名和密码')
     return false
   }
   const loginResult = await login(loginInfo.value)
   if (loginResult.code === 200) {
-    // @ts-ignore
-    $message.success('登录成功')
+    window.$message.success('登录成功')
     // useLocalStorage("userInfo", loginResult);
     const common = useCommonStore()
     // common.$patch(state => {
