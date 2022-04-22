@@ -1,6 +1,6 @@
 <template>
   <n-config-provider
-    :theme-overrides="useTheme.naiveThemeOverrides"
+    :theme-overrides="useTheme.themeSetting.naiveThemeOverrides"
     :locale="zhCN"
     :date-locale="dateZhCN"
     class="h-full"
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { defineComponent, h } from "vue";
 import { zhCN, dateZhCN } from "naive-ui";
-import { useThemeStore } from "@/store/module/index";
+import { useThemeStore } from "@/store/modules/index";
 
 import { useLoadingBar, useDialog, useMessage, useNotification } from "naive-ui";
 
@@ -42,7 +42,6 @@ function registerNaiveTools() {
     });
   });
 }
-
 const NaiveProviderContent = defineComponent({
   setup() {
     registerNaiveTools();

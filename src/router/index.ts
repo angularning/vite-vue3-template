@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import LayoutDefault from '@/layout/default/index.vue'
-import IndexDetail from '@/views/index/IndexDetail.vue'
-import ADetail from '@/views/a/Detail.vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -21,24 +19,60 @@ const routes: RouteRecordRaw[] = [
         {
             path: 'detail',
             name: 'IndexDetail',
-            component: IndexDetail,
+            component: () => import('@/views/index/IndexDetail.vue'),
         }
     ],
   },
+
   {
-    path: '/a',
-    name: 'A',
+    path: '/category',
+    name: 'category',
     component: LayoutDefault,
     children: [
         {
             path: '',
-            name: 'AIndex',
-            component: () => import('@/views/a/Index.vue'),
+            name: 'categoryIndex',
+            component: () => import('@/views/categoryDirectory/Index.vue'),
         },
         {
             path: 'detail',
-            name: 'ADetail',
-            component: ADetail,
+            name: 'categoryDetail',
+            component: () => import('@/views/categoryDirectory/Detail.vue'),
+        }
+    ],
+  },
+  {
+    path: '/dataBoard',
+    name: 'dataBoard',
+    component: LayoutDefault,
+    children: [
+        {
+            path: '',
+            name: 'dataBoardIndex',
+            component: () => import('@/views/dataBoard/Index.vue'),
+        },
+        {
+            path: 'detail',
+            name: 'categoryDetail',
+            component: () => import('@/views/dataBoard/Detail.vue'),
+        }
+    ],
+  },
+
+  {
+    path: '/priceMonitor',
+    name: 'priceMonitor',
+    component: LayoutDefault,
+    children: [
+        {
+            path: '',
+            name: 'priceMonitorIndex',
+            component: () => import('@/views/priceMonitor/Index.vue'),
+        },
+        {
+            path: 'detail',
+            name: 'categoryDetail',
+            component: () => import('@/views/priceMonitor/Detail.vue'),
         }
     ],
   },

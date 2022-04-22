@@ -1,8 +1,13 @@
 import { defineStore } from 'pinia'
 import { themeSetting } from '@/settings'
 export const useThemeStore = defineStore('theme', {
+  persist: {
+    enabled: true,
+  },
   state() {
-    return themeSetting
+    return {
+      themeSetting,
+    }
   },
   getters: {},
   actions: {

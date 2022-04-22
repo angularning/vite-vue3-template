@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import NProgress from 'nprogress'
 
 // 设置请求头和请求路径
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = import.meta.env.VITE_HOST_API || ''
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.interceptors.request.use(
@@ -21,7 +21,7 @@ axios.interceptors.request.use(
 )
 // 响应拦截
 axios.interceptors.response.use((res) => {
-  if (res.data.code === 111) {
+  if (res.data.code === 0) {
     sessionStorage.setItem('token', '')
     // token过期操作
   }
@@ -37,6 +37,7 @@ interface ResType<T> {
 interface Http {
   get<T>(url: string, params?: unknown): Promise<ResType<T>>
   post<T>(url: string, params?: unknown): Promise<ResType<T>>
+  patch<T>(url: string, params?: unknown): Promise<ResType<T>>
   upload<T>(url: string, params: unknown): Promise<ResType<T>>
   download(url: string): void
 }
@@ -58,6 +59,21 @@ const http: Http = {
     })
   },
   post(url, params) {
+    return new Promise((resolve, reject) => {
+      NProgress.start()
+      axios
+        .post(url, JSON.stringify(params))
+        .then((res) => {
+          NProgress.done()
+          resolve(res.data)
+        })
+        .catch((err) => {
+          NProgress.done()
+          reject(err.data)
+        })
+    })
+  },
+  patch(url, params) {
     return new Promise((resolve, reject) => {
       NProgress.start()
       axios

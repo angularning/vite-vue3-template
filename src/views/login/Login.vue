@@ -26,12 +26,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, onBeforeRouteLeave } from 'vue-router'
-onBeforeRouteLeave((to, from) => {
-  const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
-  // cancel the navigation and stay on the same page
-  if (!answer) return false
-})
+import { useRouter } from 'vue-router'
+import { login } from '@/service/api'
+import { useLocalStorage } from '@vueuse/core'
+import { useCommonStore } from '@/store/modules/common'
 const router = useRouter()
 const loginInfo = ref({
   name: 'admin',
@@ -41,10 +39,24 @@ const title = ref('登录系统')
 async function handleLogin() {
   const { name, password } = loginInfo.value
   if (!name || !password) {
-    alert('请输入密码')
-    return
+    // @ts-ignore
+    $message.warning('请输入用户名和密码')
+    return false
   }
-  router.push({ path: '/index', query: { id: (Math.random() * 10000).toFixed(0) } })
+  const loginResult = await login(loginInfo.value)
+  if (loginResult.code === 200) {
+    // @ts-ignore
+    $message.success('登录成功')
+    // useLocalStorage("userInfo", loginResult);
+    const common = useCommonStore()
+    // common.$patch(state => {
+    //     state.user = loginResult
+    // })
+    common.$patch({
+      user: loginResult,
+    })
+    router.push({ path: '/index', query: { id: (Math.random() * 10000).toFixed(0) } })
+  }
 }
 </script>
 

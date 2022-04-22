@@ -5,11 +5,8 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AppProvider: typeof import('./src/components/AppProvider/index.vue')['default']
-    DialogContent: typeof import('./src/components/AppProvider/DialogContent.vue')['default']
     FetchList: typeof import('./src/components/index/FetchList.vue')['default']
     Header: typeof import('./src/components/common/header/index.vue')['default']
-    LoadingBar: typeof import('./src/components/AppProvider/LoadingBar.vue')['default']
-    MessageContent: typeof import('./src/components/AppProvider/MessageContent.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
