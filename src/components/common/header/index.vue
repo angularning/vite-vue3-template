@@ -3,7 +3,8 @@
     <div>logo</div>
     <div>
       <n-input type="primary" v-model="search"></n-input>
-      <n-button @click="handleDetail">跳转 index page</n-button>
+      <n-button @click="handleDetail" type="primary">跳转 index page</n-button>
+      <n-button @click="handleTheme" type="primary">切换</n-button>
     </div>
     <div class="menu">
       <ul>
@@ -18,6 +19,7 @@
 
 <script setup lang="ts">
 import { useRouter, useRoute } from "vue-router";
+import { useThemeStore } from "@/store";
 import { ref } from "vue";
 import { useAuth } from "@/hooks";
 const router = useRouter();
@@ -33,6 +35,11 @@ const handleDetail = () => {
       search: search.value,
     },
   });
+};
+const handleTheme = () => {
+  const theme = useThemeStore();
+//   console.log(theme.themeSetting.darkMode)
+  theme.setDarkMode(!theme.themeSetting.darkMode);
 };
 </script>
 

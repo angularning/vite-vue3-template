@@ -1,7 +1,5 @@
 //http.ts
 import axios, { AxiosRequestConfig } from 'axios'
-import NProgress from 'nprogress'
-
 // 设置请求头和请求路径
 axios.defaults.baseURL = import.meta.env.VITE_HOST_API || ''
 axios.defaults.timeout = 10000
@@ -41,66 +39,53 @@ interface Http {
   upload<T>(url: string, params: unknown): Promise<ResType<T>>
   download(url: string): void
 }
-
 const http: Http = {
   get(url, params) {
     return new Promise((resolve, reject) => {
-      NProgress.start()
       axios
         .get(url, { params })
         .then((res) => {
-          NProgress.done()
           resolve(res.data)
         })
         .catch((err) => {
-          NProgress.done()
           reject(err.data)
         })
     })
   },
   post(url, params) {
     return new Promise((resolve, reject) => {
-      NProgress.start()
       axios
         .post(url, JSON.stringify(params))
         .then((res) => {
-          NProgress.done()
           resolve(res.data)
         })
         .catch((err) => {
-          NProgress.done()
           reject(err.data)
         })
     })
   },
   patch(url, params) {
     return new Promise((resolve, reject) => {
-      NProgress.start()
       axios
         .post(url, JSON.stringify(params))
         .then((res) => {
-          NProgress.done()
           resolve(res.data)
         })
         .catch((err) => {
-          NProgress.done()
           reject(err.data)
         })
     })
   },
   upload(url, file) {
     return new Promise((resolve, reject) => {
-      NProgress.start()
       axios
         .post(url, file, {
           headers: { 'Content-Type': 'multipart/form-data' },
         })
         .then((res) => {
-          NProgress.done()
           resolve(res.data)
         })
         .catch((err) => {
-          NProgress.done()
           reject(err.data)
         })
     })

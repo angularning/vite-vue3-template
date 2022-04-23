@@ -16,7 +16,6 @@
     "naive-ui": "^2.21.2",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.0-rc.10",
-    "pinia-plugin-persist": "^1.0.0",
     "vfonts": "^0.1.0",
     "vue": "^3.2.2",
     "vue-router": "4"

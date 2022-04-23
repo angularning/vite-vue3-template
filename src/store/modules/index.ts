@@ -1,8 +1,22 @@
 import { defineStore } from 'pinia'
 import { themeSetting } from '@/settings'
+export interface PersistStrategy {
+  key?: string
+  storage?: Storage
+  paths?: string[]
+}
+export interface PersistOptions {
+  enabled: true
+  strategies?: PersistStrategy[]
+}
 export const useThemeStore = defineStore('theme', {
   persist: {
     enabled: true,
+    // strategies: [
+    //     {
+    //       storage: localStorage,
+    //     }
+    //   ]
   },
   state() {
     return {
@@ -11,8 +25,8 @@ export const useThemeStore = defineStore('theme', {
   },
   getters: {},
   actions: {
-    // setTabVisible(visible: boolean) {
-    //   this.tags.visible = visible
-    // },
+    setDarkMode(visible: boolean) {
+      this.themeSetting.darkMode = visible
+    },
   },
 })

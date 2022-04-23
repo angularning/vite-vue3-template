@@ -1,14 +1,18 @@
 import { defineStore } from 'pinia'
 interface CommonState {
-    user: {};
-  }
+  user: {}
+}
 export const useCommonStore = defineStore('common', {
   persist: {
     enabled: true,
   },
   state: (): CommonState => ({
-    user: {}
+    user: {},
   }),
   getters: {},
-  actions: {},
+  actions: {
+    setUser(data: any) {
+      this.user = data
+    },
+  },
 })

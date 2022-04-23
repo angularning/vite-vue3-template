@@ -1,6 +1,7 @@
 <template>
   <n-config-provider
     :theme-overrides="useTheme.themeSetting.naiveThemeOverrides"
+    :theme="useTheme.themeSetting.darkMode ? darkTheme : null"
     :locale="zhCN"
     :date-locale="dateZhCN"
     class="h-full"
@@ -20,7 +21,7 @@
 
 <script setup lang="ts">
 import { defineComponent, h } from "vue";
-import { zhCN, dateZhCN } from "naive-ui";
+import { zhCN, dateZhCN, darkTheme } from "naive-ui";
 import { useThemeStore } from "@/store/modules/index";
 
 import { useLoadingBar, useDialog, useMessage, useNotification } from "naive-ui";
