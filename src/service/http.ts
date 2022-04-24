@@ -1,15 +1,18 @@
+import { useCommonStore, CommonState } from '@/store/modules/common'
+import { NoAuthApiList } from './auth'
 //http.ts
 import axios, { AxiosRequestConfig } from 'axios'
 // 设置请求头和请求路径
-axios.defaults.baseURL = import.meta.env.VITE_HOST_API || ''
+axios.defaults.baseURL = import.meta.env.VITE_HOST_API
 axios.defaults.timeout = 10000
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 axios.interceptors.request.use(
   (config): AxiosRequestConfig<any> => {
-    const token = window.sessionStorage.getItem('token')
-    if (token) {
+    const common: CommonState = useCommonStore()
+    const token = common.userInfo.token
+    if (token && !NoAuthApiList.includes(config.url)) {
       //@ts-ignore
-      config.headers.token = token
+      config.headers.Authorization = `Bearer ${token}`
     }
     return config
   },
@@ -20,7 +23,6 @@ axios.interceptors.request.use(
 // 响应拦截
 axios.interceptors.response.use((res) => {
   if (res.data.code === 0) {
-    sessionStorage.setItem('token', '')
     // token过期操作
   }
   return res

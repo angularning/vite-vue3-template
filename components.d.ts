@@ -4,25 +4,16 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AppProvider: typeof import('./src/components/AppProvider/index.vue')['default']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElRow: typeof import('element-plus/es')['ElRow']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     FetchList: typeof import('./src/components/index/FetchList.vue')['default']
     Header: typeof import('./src/components/common/header/index.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
-    NConfigProvider: typeof import('naive-ui')['NConfigProvider']
-    NDialogProvider: typeof import('naive-ui')['NDialogProvider']
-    NInput: typeof import('naive-ui')['NInput']
-    NLayout: typeof import('naive-ui')['NLayout']
-    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
-    NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']
-    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
-    NLoadingBarProvider: typeof import('naive-ui')['NLoadingBarProvider']
-    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
-    NNotificationProvider: typeof import('naive-ui')['NNotificationProvider']
-    NOption: typeof import('naive-ui')['NOption']
-    NPagination: typeof import('naive-ui')['NPagination']
-    NSelect: typeof import('naive-ui')['NSelect']
-    NSpace: typeof import('naive-ui')['NSpace']
-    NSpin: typeof import('naive-ui')['NSpin']
+    Loading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }
 

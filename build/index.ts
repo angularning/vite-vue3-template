@@ -11,7 +11,8 @@ import VueSetupExtend from 'vite-plugin-vue-setup-extend'
  * usage: 直接使用组件,无需在任何地方导入组件
  */
 import Components from 'unplugin-vue-components/vite'
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import AutoImport from 'unplugin-auto-import/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 /**
  * * unplugin-icons插件，自动引入iconify图标
@@ -24,8 +25,11 @@ import Icons from 'unplugin-icons/vite'
     const plugins = [
       vue(),
       VueSetupExtend(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
       Components({
-        resolvers: [NaiveUiResolver()],
+        resolvers: [ElementPlusResolver()],
       }),
       Icons({ compiler: 'vue3', autoInstall: true }),
     //   unocss(),

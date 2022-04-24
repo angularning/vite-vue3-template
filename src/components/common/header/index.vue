@@ -1,11 +1,6 @@
 <template>
   <header class="header">
-    <div>logo</div>
-    <div>
-      <n-input type="primary" v-model="search"></n-input>
-      <n-button @click="handleDetail" type="primary">跳转 index page</n-button>
-      <n-button @click="handleTheme" type="primary">切换</n-button>
-    </div>
+    <div><el-avatar :size="50" :src="circleUrl" /></div>
     <div class="menu">
       <ul>
         <li><a>品类目录</a></li>
@@ -19,15 +14,14 @@
 
 <script setup lang="ts">
 import { useRouter, useRoute } from "vue-router";
-import { useThemeStore } from "@/store";
 import { ref } from "vue";
 import { useAuth } from "@/hooks";
+import { useCommonStore } from "@/store/modules/common";
 const router = useRouter();
 const route = useRoute();
 const auth = useAuth();
 const search = ref(null);
 const handleDetail = () => {
-  console.log(auth);
   router.push({
     path: "/index/detail",
     query: {
@@ -36,10 +30,12 @@ const handleDetail = () => {
     },
   });
 };
+const commonStore = useCommonStore();
+const userInfo: Auth.UserInfo = commonStore.userInfo;
+const circleUrl = userInfo?.data?.userInfo?.headerImg
 const handleTheme = () => {
-  const theme = useThemeStore();
-//   console.log(theme.themeSetting.darkMode)
-  theme.setDarkMode(!theme.themeSetting.darkMode);
+  //   console.log(theme.themeSetting.darkMode)
+  //   theme.setDarkMode(!theme.themeSetting.darkMode);
 };
 </script>
 

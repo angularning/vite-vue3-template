@@ -15,6 +15,11 @@ pinia.use(piniaPersist)
 //     needKeepIds: ['common'], // 对于特定store进行持久化，空或者不传，则对所有的store进行缓存到本地
 //   })
 // )
+// 使用element-plus
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+app.use(ElementPlus)
+
 app.use(router)
 app.use(pinia)
 

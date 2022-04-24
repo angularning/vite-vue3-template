@@ -1,47 +1,41 @@
 <template>
-  <n-spin :show="show">
-    <div class="login-page">
-      <n-button type="primary" @click="showSpin">控制显示loading</n-button>
-      <div class="wrapper">
-        <div class="left">
-          <img
-            src="../../assets/images/login_banner.png"
-            height="380"
-            alt="login_banner"
+  <div class="login-page" v-loading="loading">
+      <el-button type="primary" @click="showLoading">点击loading</el-button>
+    <div class="wrapper">
+      <div class="left">
+        <img src="../../assets/images/login_banner.png" height="380" alt="login_banner" />
+      </div>
+
+      <div class="form-wrapper">
+        <h5 class="brand">
+          <!-- <img src="../../assets/images/logo.svg" width="45" mr-15 alt="logo" /> -->
+          {{ title }}
+        </h5>
+        <div class="form-item">
+          <input
+            v-model="loginInfo.name"
+            autofocus
+            type="text"
+            class="input"
+            placeholder="username"
+            @keydown.enter="handleLogin"
           />
         </div>
-
-        <div class="form-wrapper">
-          <h5 class="brand">
-            <!-- <img src="../../assets/images/logo.svg" width="45" mr-15 alt="logo" /> -->
-            {{ title }}
-          </h5>
-          <div class="form-item">
-            <input
-              v-model="loginInfo.name"
-              autofocus
-              type="text"
-              class="input"
-              placeholder="username"
-              @keydown.enter="handleLogin"
-            />
-          </div>
-          <div class="form-item">
-            <input
-              v-model="loginInfo.password"
-              type="password"
-              class="input"
-              placeholder="password"
-              @keydown.enter="handleLogin"
-            />
-          </div>
-          <div class="form-item">
-            <button class="submit-btn" @click="handleLogin">登录</button>
-          </div>
+        <div class="form-item">
+          <input
+            v-model="loginInfo.password"
+            type="password"
+            class="input"
+            placeholder="password"
+            @keydown.enter="handleLogin"
+          />
+        </div>
+        <div class="form-item">
+          <button class="submit-btn" @click="handleLogin">登录</button>
         </div>
       </div>
     </div>
-  </n-spin>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -52,43 +46,32 @@ import { login } from "@/service/api";
 import { useCommonStore } from "@/store/modules/common";
 // import { useThemeStore } from '@/store'
 const router = useRouter();
-let show = ref<boolean>(false);
+let loading = ref<boolean>(false);
 const loginInfo = ref({
   name: "admin",
   password: "admin",
 });
-watch(show, (value) => {
+watch(loading, (value) => {
   if (value) {
     setTimeout(() => {
-      show.value = !show.value;
+      loading.value = !loading.value;
     }, 2000);
   }
 });
 const title = ref("登录系统");
-const showSpin = () => {
-  show.value = !show.value;
+const showLoading = () => {
+  loading.value = !loading.value;
 };
 async function handleLogin() {
-  show.value = true;
+  loading.value = true;
   const { name, password } = loginInfo.value;
   if (!name || !password) {
-    window.$message.warning("请输入用户名和密码");
     return false;
   }
   const loginResult = await login(loginInfo.value);
   if (loginResult.code === 200) {
-    window.$message.success("登录成功");
-    // useStorage("userInfo", loginResult);
     const common = useCommonStore();
-    // const theme = useThemeStore()
-    // theme.setDarkMode(true)
-    // common.$patch(state => {
-    //     state.user = loginResult
-    // })
-    // common.$patch({
-    //   user: loginResult,
-    // })
-    common.setUser(loginResult);
+    common.setUserInfo(loginResult);
     router.push({ path: "/index", query: { id: (Math.random() * 10000).toFixed(0) } });
   }
 }

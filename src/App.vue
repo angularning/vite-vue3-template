@@ -1,11 +1,11 @@
 <template>
-  <AppProvider>
-    <router-view v-slot="{ Component }">
+  <router-view v-slot="{ Component }">
       <component :is="Component" />
     </router-view>
-  </AppProvider>
 </template>
 
 <script setup lang="ts"></script>
 
-<style></style>
+<style lang="scss">
+// @import "@/assets/style/main.scss";
+</style>

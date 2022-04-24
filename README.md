@@ -1,6 +1,12 @@
 ## 项目说明
 - 使用vite创建项目
 - 使用vue3
+- 使用element-plus
+### 文档地址
+- vue3 https://v3.cn.vuejs.org/
+- vueuse https://vueuse.org/
+- element-plus https://element-plus.org/zh-CN/
+- pinia https://pinia.vuejs.org/
 ## 指南
 - src 目录存放源代码
 - src/views 存放业务核心页面，可以按照目录名称依次新增
