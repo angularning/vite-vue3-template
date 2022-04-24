@@ -8,7 +8,12 @@
     "serve": "vite preview",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prettier": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit:comment": "引导设置规范化的提交信息",
+    "commit": "git-cz"
+  },
+  "commitizen": {
+    "path": "node_modules/cz-customizable"
   },
   "dependencies": {
     "@vueuse/core": "^8.3.0",
@@ -24,6 +29,8 @@
   },
   "devDependencies": {
     "@babel/types": "^7.16.0",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@types/node": "^16.11.10",
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
@@ -31,6 +38,10 @@
     "@vitejs/plugin-vue": "^1.2.5",
     "@vue/compiler-sfc": "^3.0.5",
     "autoprefixer": "^10.4.0",
+    "commitizen": "^4.2.4",
+    "commitlint-config-cz": "^0.13.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
     "dart-sass": "^1.25.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",

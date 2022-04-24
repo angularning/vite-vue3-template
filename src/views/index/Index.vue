@@ -47,6 +47,10 @@ const options = ref([
     label: "京东",
     value: "2",
   },
+  {
+    label: "天猫",
+    value: "3",
+  },
 ]);
 const toSearch = async () => {
   const data = {
